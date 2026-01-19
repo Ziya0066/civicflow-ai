@@ -41,7 +41,7 @@ app.post('/analyze', upload.single('image'), async (req, res) => {
     
     console.log(`Processing image... Location: ${userLocation}, Lang: ${userLanguage}`);
 
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-pro" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
     const imagePart = fileToGenerativePart(req.file.path, req.file.mimetype);
     
     const FINAL_PROMPT = `

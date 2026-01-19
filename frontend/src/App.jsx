@@ -15,14 +15,14 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyCpVy9xFdZnsvCxTly2uyiVziUvt1hT_04",
-  authDomain: "civicflow-hackathon.firebaseapp.com",
-  projectId: "civicflow-hackathon",
-  storageBucket: "civicflow-hackathon.firebasestorage.app",
-  messagingSenderId: "452442702790",
-  appId: "1:452442702790:web:946911986d64ffaf8b28c7"
-};
+// const firebaseConfig = {
+//   apiKey: "AIzaSyCpVy9xFdZnsvCxTly2uyiVziUvt1hT_04",
+//   authDomain: "civicflow-hackathon.firebaseapp.com",
+//   projectId: "civicflow-hackathon",
+//   storageBucket: "civicflow-hackathon.firebasestorage.app",
+//   messagingSenderId: "452442702790",
+//   appId: "1:452442702790:web:946911986d64ffaf8b28c7"
+// };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
