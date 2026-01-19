@@ -322,3 +322,13 @@ h2 {
   font-weight: 700;
   text-decoration: none;
 }
+
+.action-btn-secondary1 {
+  background-color: #f0a314;
+  margin: 10px;
+}
+
+.action-btn-secondary2 {
+  background-color: #a519e6;
+}
+
