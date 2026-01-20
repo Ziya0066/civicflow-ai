@@ -15,7 +15,7 @@ app.use(express.json());
 app.use('/uploads', express.static('uploads'));
 
 // 2. SETUP STORAGE
-// Ensure the 'uploads' folder exists manually if this crashes
+
 const upload = multer({ dest: 'uploads/' });
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
@@ -93,8 +93,7 @@ app.post('/analyze', upload.single('image'), async (req, res) => {
         return res.status(500).json({ error: "AI response was not valid JSON" });
     }
 
-    // === CREATE LOCAL URL ===
-    // This creates the http://localhost:5000/uploads/filename link
+  
     const protocol = req.protocol;
     const host = req.get('host'); 
     data.image_url = `${protocol}://${host}/uploads/${req.file.filename}`;
@@ -102,19 +101,11 @@ app.post('/analyze', upload.single('image'), async (req, res) => {
     res.json(data);
 
   } catch (error) {
-    console.error("SERVER CRASH ERROR:", error); // Check your terminal for this!
+    console.error("SERVER CRASH ERROR:", error); 
     res.status(500).json({ error: 'Analysis failed', details: error.message });
   }
 });
 
-// backend/index.js - PASTE THIS BEFORE app.listen()
-
-// === ROUTE 2: MANUAL TEXT ANALYSIS (The Letter Writer) ===
-// backend/index.js (Replace the '/manual-analyze' route with this)
-
-// backend/index.js (Replace the '/manual-analyze' route with this)
-
-// backend/index.js - PASTE THIS BEFORE app.listen()
 
 // === ROUTE 2: MANUAL TEXT ANALYSIS (The Letter Writer) ===
 app.post('/manual-analyze', upload.none(), async (req, res) => {
@@ -164,7 +155,7 @@ app.post('/manual-analyze', upload.none(), async (req, res) => {
         const cleanJson = text.replace(/```json|```/g, '').trim();
         const data = JSON.parse(cleanJson);
 
-        // Add a placeholder icon so the UI doesn't break
+      
         data.image_url = "https://cdn-icons-png.flaticon.com/512/12391/12391857.png"; 
 
         res.json(data);

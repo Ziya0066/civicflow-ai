@@ -9,10 +9,6 @@ import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage"; // <--- NEW IMPORTS
 
-// Import the functions you need from the SDKs you need
-
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -27,7 +23,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const storage = getStorage(app); // <--- INITIALIZE STORAGE
+const storage = getStorage(app); 
 const provider = new GoogleAuthProvider();
 
 function App() {
@@ -91,9 +87,9 @@ function App() {
     
     // 2. Replace placeholders with Real Name
     if (user && user.displayName) {
-        cleaned = cleaned.replace(/\[Your Name\]/g, user.displayName); // Replaces [Your Name]
-        cleaned = cleaned.replace(/\[Name\]/g, user.displayName);      // Replaces [Name]
-        cleaned = cleaned.replace(/\[Citizen Name\]/g, user.displayName); // Replaces [Citizen Name]
+        cleaned = cleaned.replace(/\[Your Name\]/g, user.displayName); 
+        cleaned = cleaned.replace(/\[Name\]/g, user.displayName);      
+        cleaned = cleaned.replace(/\[Citizen Name\]/g, user.displayName); 
     }
     
     return cleaned;
@@ -115,7 +111,7 @@ function App() {
           // SUCCESS CASE
           const { latitude, longitude } = position.coords;
           try {
-             // 3. Try to get the Address Name (Reverse Geocoding)
+             // 3. Try to get the Address Name 
              const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=18&addressdetails=1`;
              const res = await fetch(url);
              const data = await res.json();
@@ -130,7 +126,7 @@ function App() {
           }
       },
       (error) => {
-          // ERROR CASE - This tells you exactly what is wrong!
+          
           console.error("GPS Error:", error);
           
           let errorMsg = "❌ GPS Error";
@@ -284,8 +280,7 @@ function App() {
       setTimeout(() => setShowConfetti(false), 5000);
   };
 
-  // ... (t object and render logic remains the same)
-  // Re-pasting the "t" object and Return block for safety
+
   const t = {
     title: language === "English" ? (<div style={{display:'flex', alignItems:'center', justifyContent:'center', gap:'10px'}}>CivicFlow AI <span className="emoji-logo" style={{fontSize:'35px'}}>🏙️</span></div>) : (<div style={{display:'flex', flexDirection:'column', alignItems:'center'}}><div style={{display:'flex', alignItems:'center', justifyContent:'center', gap:'10px'}}>CivicFlow AI <span className="emoji-logo" style={{fontSize:'35px'}}>🏙️</span></div><div style={{ fontSize: '0.6em', marginTop: '5px', fontWeight: '400', color: '#555' }}>(नागरिक सुविधा AI)</div></div>),
     subtitle: language === "English" ? "Udaipur's Smart Civic Assistant" : "उदयपुर का स्मार्ट सहायक",
