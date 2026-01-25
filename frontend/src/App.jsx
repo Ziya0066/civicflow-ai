@@ -222,7 +222,7 @@ function App() {
       formData.append('location', address);
       formData.append('language', language); 
       
-      const response = await axios.post('http://localhost:5000/analyze', formData, {
+      const response = await axios.post('https://civicflow-backend.onrender.com/analyze', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
 
