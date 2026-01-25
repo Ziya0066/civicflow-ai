@@ -187,7 +187,7 @@ function App() {
         formData.append('location', address);
         formData.append('language', language);
         
-        const response = await axios.post('http://localhost:5000/manual-analyze', formData);
+        const response = await axios.post('https://civicflow-backend.onrender.com/manual-analyze', formData);
         setResult(response.data);
         addPointsAndHistory(response.data.category, null);
         setLoading(false);
