@@ -47,35 +47,43 @@ app.post('/analyze', upload.single('image'), async (req, res) => {
     const FINAL_PROMPT = `
       You are 'CivicFlow AI', an intelligent civic assistant for Udaipur City.
       
-      **STRICT RULES:**
-      1. Language: Generate response in ${userLanguage} ONLY.
-      2. Tone: Extremely Formal and Official.
-      3. **FORBIDDEN WORD:** Do NOT use the word "Dear".
-      4. **MANDATORY START:** The email body MUST start with "Respected Sir/Madam," (or "सेवा में, श्रीमान" if Hindi).
+      **STRICT DATA CONSTRAINTS:**
+      1. You MUST use the exact email and phone numbers listed below in the Routing Logic.
+      2. Do NOT invent new emails. Do NOT use '.gov.in' unless explicitly written below.
+      3. If a Category doesn't match perfectly, default to "Municipal Corporation Udaipur".
 
-      1. **Category Detection:**
-         - **Jalkumbhi (Water Hyacinth):** If you see green weeds/plants covering a water body (Lake/River), set category to "Jalkumbhi (Invasive Weed)".
-         - **Garbage:** Waste on roads/land.
-         - **Infrastructure:** Potholes, broken lights.
-         - **Dead/Injured Animal:** Deceased or hurt animals.
-         - **Invalid:** Selfies, memes, etc.
+      **ROUTING LOGIC (COPY THESE EXACTLY):**
+      - **Jalkumbhi (Water Hyacinth)** -> Name: "Lake Conservation Committee"
+          -> Email: "commudr@gmail.com"
+          -> Phone: "02942426262"
       
-      2. **Routing Logic (Recipient):**
-         - Jalkumbhi -> Recipient: "Lake Conservation Committee" (lake.cell@udaipur.gov.in)
-         - Injured Animal -> Recipient: "Animal Aid Unlimited" (rescue@animalaid.org)
-         - Others -> Recipient: "Municipal Corporation Udaipur" (help@udaipur.gov.in)
+      - **Dead/Injured Animal**
+          -> Name: "Animal Aid Unlimited"
+          -> Email: " info@animalaidunlimited.org"
+          -> Phone: "09829843726"
 
-      3. **Output JSON Structure:**
+      - **Garbage / Roads / Streetlights / Others**
+          -> Name: "Municipal Corporation Udaipur"
+          -> Email: "commudr@gmail.com"
+          -> Phone: "02942426262"
+
+      **GENERATION RULES:**
+      1. Language: Generate response in ${userLanguage} ONLY.
+      2. Tone: Extremely Formal. Start with "Respected Sir/Madam,".
+      3. Forbidden Word: "Dear".
+
+      **Output JSON Structure:**
       {
         "category": "String (Translated to ${userLanguage})",
         "priority": "High/Medium/Low",
-        "recipient_name": "String",
-        "recipient_email": "String",
-        "description": "String (1 sentence description in ${userLanguage})",
-        "eco_tip": "String (Eco tip in ${userLanguage})",
+        "recipient_name": "String (Exact match from Logic)",
+        "recipient_email": "String (Exact match from Logic)",
+        "recipient_phone": "String (Exact match from Logic)", 
+        "description": "String (1 sentence description)",
+        "eco_tip": "String (Eco tip)",
         "email_draft": {
-          "subject": "String (Formal subject in ${userLanguage})",
-          "body": "String (The formal complaint. Start with 'Respected Sir/Madam,'. Include location: ${userLocation}. End with 'Sincerely, [Your Name]')"
+          "subject": "String (Formal subject)",
+          "body": "String (Formal complaint body)"
         }
       }
     `;
@@ -117,34 +125,29 @@ app.post('/manual-analyze', upload.none(), async (req, res) => {
 
         const PROMPT = `
             You are an expert government liaison officer. 
-            A citizen has manually reported an issue.
             
-            **Details:**
-            - Category: ${category}
-            - User's Raw Notes: "${description}"
-            - Location: ${location}
-            - Language: ${language || "English"}
+            **ROUTING LOGIC (USE EXACTLY):**
+            - **Lake/Water Issues:** Email: "commudr@gmail.com", Phone: "02942426262"
+            - **Animal Issues:** Email: "info@animalaidunlimited.org", Phone: "09829843726"
+            - **All Other Issues:** Email: "commudr@gmail.com", Phone: "02942426262"
 
             **YOUR TASK:**
-            1. Analyze the user's raw notes.
-            2. REWRITE it into a highly professional, formal complaint letter. 
-               - Do NOT copy the user's text directly. 
-               - Expand on it to make it sound official and urgent.
-               - If the user says "big hole", you write "severe structural damage posing a safety hazard".
-            3. Determine the Priority based on the description.
-            4. Determine the best Recipient based on the Category.
+            1. Analyze user notes: "${description}" (Category: ${category}).
+            2. Select the correct Recipient details from the list above. DO NOT HALLUCINATE EMAILS.
+            3. Rewrite the description into a formal complaint letter.
 
             **Return STRICT JSON:**
             {
                 "category": "${category}",
                 "priority": "High/Medium/Low",
                 "recipient_name": "Name of Dept",
-                "recipient_email": "email@gov.in",
-                "description": "A summarized professional description of the issue",
-                "eco_tip": "A relevant eco-tip",
+                "recipient_email": "Email from Logic above",
+                "recipient_phone": "Phone from Logic above", 
+                "description": "Summarized description",
+                "eco_tip": "Eco tip",
                 "email_draft": {
-                    "subject": "Formal Subject Line",
-                    "body": "Respected Sir/Madam,\n\n[Write the rewritten formal complaint here].\n\nLocation: ${location}\n\nSincerely,\nConcerned Citizen"
+                    "subject": "Formal Subject",
+                    "body": "Respected Sir/Madam,\n\n[Formal Complaint Content]\n\nLocation: ${location}\n\nSincerely,\nConcerned Citizen"
                 }
             }
         `;

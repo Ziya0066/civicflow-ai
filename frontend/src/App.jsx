@@ -160,7 +160,7 @@ function App() {
             category: language === "English" ? "Garbage Vehicle Missed" : "कचरा गाड़ी अनुपस्थित",
             priority: "High 🔥",
             recipient_name: "Nagar Nigam (Vehicle Dept)",
-            recipient_email: "help@udaipur.gov.in",
+            recipient_email: "commudr@gmail.com",
             description: language === "English" ? "The daily garbage collection vehicle did not arrive in my area today." : "आज मेरे क्षेत्र में दैनिक कचरा संग्रहण गाड़ी नहीं आई।",
             eco_tip: language === "English" ? "Report missed pickups immediately." : "तुरंत रिपोर्ट करें।",
             image_url: "https://cdn-icons-png.flaticon.com/512/2554/2554936.png", 
@@ -339,7 +339,7 @@ const mapLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComp
       {/* VIEW 1: HOME */}
       {activeView === "home" && !result && (
         <div className="card">
-           <h3 style={{fontSize:'13px', textTransform:'uppercase', letterSpacing:'1px', color:'#94a3b8', fontWeight:'700', marginBottom:'15px'}}>📸 Photo Report</h3>
+           <h3 style={{fontSize:'13px', textTransform:'uppercase', letterSpacing:'1px', color:'#94a3b8', fontWeight:'700', marginBottom:'15px'}}>Photo Report</h3>
            <div className="upload-section">
               <input type="file" accept="image/*" capture="environment" id="cameraInput" onChange={handleImageChange} hidden />
               <label htmlFor="cameraInput" className="upload-btn camera-btn">{t.takePhoto}</label>
@@ -420,19 +420,20 @@ const mapLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComp
 
               <div className="button-group">
                 {result.recipient_name.includes("Animal") ? (
-                   <a href="tel:+919602302323" className="send-btn call-animal" style={{color:'white', fontWeight:'bold', display:'block', textAlign:'center', padding:'10px', backgroundColor:'#d32f2f', borderRadius:'8px', marginBottom:'10px', textDecoration:'none'}}>📞 Call Animal Rescue</a>
+                   <a href="tel:+9109829843726" className="send-btn call-animal" style={{color:'white', fontWeight:'bold', display:'block', textAlign:'center', padding:'10px', backgroundColor:'#d32f2f', borderRadius:'8px', marginBottom:'10px', textDecoration:'none'}}>📞 Call Animal Rescue</a>
                 ) : result.category.includes("Jalkumbhi") ? (
-                   <a href="tel:18001806666" className="send-btn" style={{color:'white', fontWeight:'bold', display:'block', textAlign:'center', padding:'10px', backgroundColor:'#0288d1', borderRadius:'8px', marginBottom:'10px', textDecoration:'none'}}>🌊 Call Lake Patrol</a>
+                   <a href="tel:02942426262" className="send-btn" style={{color:'white', fontWeight:'bold', display:'block', textAlign:'center', padding:'10px', backgroundColor:'#0288d1', borderRadius:'8px', marginBottom:'10px', textDecoration:'none'}}>🌊 Call Lake Patrol</a>
                 ) : (
-                   <a href="tel:18001806666" className="send-btn call-nagar" style={{color:'white', fontWeight:'bold', display:'block', textAlign:'center', padding:'10px', backgroundColor:'#f57c00', borderRadius:'8px', marginBottom:'10px', textDecoration:'none'}}>☎️ Call Nagar Nigam</a>
+                   <a href="tel:02942426262" className="send-btn call-nagar" style={{color:'white', fontWeight:'bold', display:'block', textAlign:'center', padding:'10px', backgroundColor:'#f57c00', borderRadius:'8px', marginBottom:'10px', textDecoration:'none'}}>☎️ Call Nagar Nigam</a>
                 )}
                 <a href={`https://wa.me/?text=${encodeURIComponent(`*Civic Report*\n${cleanText(result.category)}\n\n${cleanText(result.description)}\n\nLoc: ${address}\n\nPhoto: ${result.image_url || 'N/A'}`)}`} target="_blank" rel="noopener noreferrer" className="send-btn whatsapp" style={{color:'white', fontWeight:'bold', display:'block', textAlign:'center', padding:'10px', backgroundColor:'#25D366', borderRadius:'8px', marginBottom:'10px', textDecoration:'none'}}>💬 Share on WhatsApp</a>
+                
                  <div className="email-row">
                     <a href={`https://mail.google.com/mail/?view=cm&fs=1&to=${result.recipient_email}&su=${encodeURIComponent(cleanText(result.email_draft.subject))}&body=${encodeURIComponent(cleanText(result.email_draft.body) + "\n\nLocation: " + address + "\nPhoto Proof: " + (result.image_url || 'Attached'))}`} target="_blank" rel="noopener noreferrer" className="send-btn gmail" style={{color:'white', fontWeight:'bold'}}>Gmail</a>
                     <a href={`https://outlook.live.com/owa/?path=/mail/action/compose&to=${result.recipient_email}&subject=${encodeURIComponent(cleanText(result.email_draft.subject))}&body=${encodeURIComponent(cleanText(result.email_draft.body) + "\n\nLocation: " + address + "\nPhoto Proof: " + (result.image_url || 'Attached'))}`} target="_blank" rel="noopener noreferrer" className="send-btn outlook" style={{color:'white', fontWeight:'bold'}}>Outlook</a>
                 </div>
               </div>
-              <button onClick={resetApp} style={{width:'100%', marginTop:'20px', padding:'12px', background:'#fa48d1', border:'1px solid #fa48d1', borderRadius:'16px', cursor:'pointer'}}>Back to Home</button>
+              <button onClick={resetApp} style={{width:'100%', marginTop:'20px', padding:'12px', background:'#827d81', border:'1px solid #e6e6e6', borderRadius:'16px', cursor:'pointer'}}>Back to Home</button>
             </div>
           </div>
           </div>

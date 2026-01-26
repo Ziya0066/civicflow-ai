@@ -86,13 +86,14 @@ body {
 }
 
 .camera-btn {
-  background-color: #e8f0fe;
-  color: #1a73e8;
+  background-color: #1b64e1;
+  color: #ffffff;
   border: 2px solid transparent;
+  font-size: medium;
 }
 
 .camera-btn:hover {
-  background-color: #d2e3fc;
+  background-color: #3175ea;
   transform: translateY(-2px);
 }
 
@@ -100,6 +101,7 @@ body {
   background-color: #f8f9fa;
   color: #5f6368;
   border: 2px dashed #dadce0;
+  font-size: medium;
 }
 
 .gallery-btn:hover {
@@ -297,38 +299,55 @@ h2 {
 
 /* === BUTTON COLORS === */
 .call-animal {
-  background-color: #d32f2f !important; /* Red */
+ border: 2px rgb(226, 6, 6) solid;
+  background-color: #ffffff !important; /* Red */
 }
 
 .call-nagar {
-  background-color: #f57c00 !important; /* Orange */
+   border: 2px rgb(253, 115, 10) solid;
+  background-color: #ffffff !important; /* Orange */
 }
 
 .whatsapp {
-  background-color: #25D366 !important; /* WhatsApp Green */
+   border: 2px rgb(5, 192, 15) solid;
+  background-color: #ffffff !important; /* WhatsApp Green */
 }
 
 .gmail {
-  background-color: #34a853 !important; /* Google Green */
+   border: 2px rgb(230, 20, 177) solid;
+  background-color: #ffffff  !important; /* Google Green */
 }
 
 .outlook {
-  background-color: #0078d4 !important; /* Outlook Blue */
+  border: 2px rgb(6, 121, 175) solid;
+  background-color: #ffffff  !important;/* Outlook Blue */
 }
 
 /* Ensure the text inside is always white and bold */
 .send-btn {
-  color: white !important;
+  color: rgb(0, 0, 0) !important;
   font-weight: 700;
   text-decoration: none;
 }
 
 .action-btn-secondary1 {
-  background-color: #f0a314;
+  border: 2px rgb(236, 205, 83) solid;
+  color: black;
+  background-color: #ffffff;
   margin: 10px;
 }
 
+.action-btn-secondary1:hover{
+  color: #0078d4;
+}
+
+
 .action-btn-secondary2 {
-  background-color: #a519e6;
+  border: 2px yellowgreen solid;
+  background-color: #ffffff;
+  color: black;
+}
+.action-btn-secondary2:hover{
+  color: #0078d4;
 }
 
